@@ -21,6 +21,13 @@ jobs:
               uses: github/codeql-action/init@v3
               with:
                 languages: javascript
+            - name: Setup JFrog CLI
+              uses: jfrog/setup-jfrog-cli@v4
+              env:  
+                JF_URL: ${{ vars.JF_URL }}
+                JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+            - name: Set CLI Config
+              run: jf npm-config --global=true --repo-resolve=saidu_practice-npm --repo-deploy=saidu_practice-npm
 
             - name: npm dependencies
               run: npm install
